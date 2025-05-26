@@ -1,8 +1,34 @@
 {% extends 'main/base.html' %}
 
-{% block title %}List of Rooms{% endblock %}
+{% block title %}List of All Rooms{% endblock %}
 
 {% block content %}
 <h1>List of All Rooms</h1>
-<p>Test text — if you see this, template is working!</p>
+
+{% if rooms %}
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Booked today</th>
+            <th>Projector</th>
+            <th>Actions</th>
+        </tr>
+        {% for room in rooms %}
+        <tr>
+            <td><a href="{% url 'room_detail' room.id %}">{{ room.name }}</a></td>
+            <td>{{ room.capacity }}</td>
+            <td>{% if room.booked_today %}Yes{% else %}No{% endif %}</td>
+            <td>{% if room.projector %}Yes{% else %}No{% endif %}</td>
+            <td>
+                <a href="{% url 'room_edit' room.id %}"><button>Edit</button></a>
+                <a href="{% url 'room_delete' room.id %}"><button>Delete</button></a>
+                <a href="{% url 'room_reserve' room.id %}"><button>Book</button></a>
+            </td>            
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No rooms available.</p>
+{% endif %}
 {% endblock %}

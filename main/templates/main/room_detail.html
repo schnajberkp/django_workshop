@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Room: {{ room.name }}{% endblock %}
+
+{% block content %}
+<h1>Room: {{ room.name }}</h1>
+
+<ul>
+    <li><strong>Capacity:</strong> {{ room.capacity }}</li>
+    <li><strong>Projector:</strong> {% if room.projector %}Yes{% else %}No{% endif %}</li>
+</ul>
+
+<h2>Future bookings</h2>
+{% if bookings %}
+    <ul>
+        {% for booking in bookings %}
+            <li>{{ booking.date }} – {{ booking.comment|default:"(no comment)" }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>This room has no future bookings.</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'room_edit' room.id %}"><button>Edit</button></a>
+    <a href="{% url 'room_delete' room.id %}"><button>Delete</button></a>
+    <a href="{% url 'room_reserve' room.id %}"><button>Book this room</button></a>
+</p>
+{% endblock %}

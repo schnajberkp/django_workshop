@@ -1,9 +1,9 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Add a Room{% endblock %}
+{% block title %}Edit Room{% endblock %}
 
 {% block content %}
-<h1>Add a New Room</h1>
+<h1>Edit Room</h1>
 
 {% if errors %}
     <ul style="color: red;">
@@ -16,16 +16,16 @@
 <form method="post">
     {% csrf_token %}
     <label for="name">Room name:</label><br>
-    <input type="text" id="name" name="name" value="{{ name|default:'' }}"><br><br>
+    <input type="text" id="name" name="name" value="{{ name }}"><br><br>
 
     <label for="capacity">Capacity:</label><br>
-    <input type="number" id="capacity" name="capacity" value="{{ capacity|default:'' }}"><br><br>
+    <input type="number" id="capacity" name="capacity" value="{{ capacity }}"><br><br>
 
     <label for="projector">
         <input type="checkbox" id="projector" name="projector" {% if projector %}checked{% endif %}>
         Projector available
     </label><br><br>
 
-    <button type="submit">Add Room</button>
+    <button type="submit">Save changes</button>
 </form>
 {% endblock %}

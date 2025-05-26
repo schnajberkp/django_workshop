@@ -22,4 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.room_list, name='room_list'),
     path('add/', views.room_add, name='room_add'),
+    path('room/new/', views.room_add, name='room_add'),
+    path('room/delete/<int:id>/', views.room_delete, name='room_delete'),
+    path('room/edit/<int:id>/', views.room_edit, name='room_edit'),
+    path('room/reserve/<int:id>/', views.room_reserve, name='room_reserve'),
+    path('room/<int:id>/', views.room_detail, name='room_detail'),
 ]
